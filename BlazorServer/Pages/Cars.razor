@@ -1,10 +1,13 @@
-﻿@page "/"
-@page "/index"
+﻿@page "/cars"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavManager
 @implements IAsyncDisposable
+<PageTitle>Cars</PageTitle>
 
 
+<div>
+    <h4>Hello. The topic for this chat room is "cars".</h4>
+</div>
 
 <div class="form-group">
     <label>
@@ -14,7 +17,7 @@
 
 <div class="form-group">
     <label>
-        Message: <input @bind="messageInput"/> @*binds to userInput string*@
+        Message: <input @bind="messageInput"/> @*binds to messageInput string*@
     </label>
 </div>
 
@@ -36,12 +39,12 @@
 
     protected override async Task OnInitializedAsync(){
         hubConnection = new HubConnectionBuilder()
-            .WithUrl(NavManager.ToAbsoluteUri("/chathub")) 
+            .WithUrl(NavManager.ToAbsoluteUri("/carshub")) 
             .WithAutomaticReconnect() //if problem with connection - it reconnects
             .Build();
 
-        //chathub requires string, string datatypes - 
-        // "ReceiveMessage must match method in ChatHub.cs
+        //requires string, string datatypes - 
+        // "ReceiveMessage must match method in CarsHub.cs
         //listen and captures ReceiveMessage from the server
         hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
         {
