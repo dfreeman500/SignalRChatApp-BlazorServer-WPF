@@ -39,6 +39,9 @@ namespace BlazorServer
 
             app.MapBlazorHub();
             app.MapHub<ChatHub>("/ChatHub"); //creates signalR /chathub url path to connect
+            app.MapHub<CounterHub>("/counterhub");
+            
+            
             app.MapFallbackToPage("/_Host");
 
             app.Run();

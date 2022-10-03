@@ -12,6 +12,7 @@ public partial class MainWindow : Window
 {
 
     HubConnection connection;
+    HubConnection counterConnection;
     public MainWindow()
     {
         InitializeComponent();
@@ -20,6 +21,11 @@ public partial class MainWindow : Window
             .WithUrl("https://localhost:7216/chathub")
             .WithAutomaticReconnect()
             .Build();
+
+        counterConnection = new HubConnectionBuilder()
+    .WithUrl("https://localhost:7216/counterhub")
+    .WithAutomaticReconnect()
+    .Build();
 
 
         connection.Reconnecting += (sender) =>
@@ -104,4 +110,33 @@ public partial class MainWindow : Window
 
 
     }
+
+    private async void openCounter_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await counterConnection.StartAsync();
+            openCounter.IsEnabled = false;
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message); //adds exception into list of messages
+
+        }
+    }
+
+    //one way connection -doesn't listen for anthing
+    private async void incrementCounter_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await counterConnection.InvokeAsync("AddToTotal", "WPF Client", 1);
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message); //adds exception into list of messages
+
+        }
+    }
 }
+
