@@ -12,7 +12,7 @@ Future Directions:
 
 * [] Queue up chats in case of poor connection?
 
-* [] Send data (ex: streaming video)?
+
 
 
 Helpful resource(s):
