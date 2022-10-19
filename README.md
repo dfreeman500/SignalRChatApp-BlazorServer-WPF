@@ -15,6 +15,6 @@ Future Directions:
 
 
 
-Helpful resource(s):
+Helpful resource(s)/Tutorial:
 https://www.youtube.com/watch?v=RaXx_f3bIRU
 https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr
